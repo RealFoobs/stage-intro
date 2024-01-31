@@ -1,0 +1,22 @@
+[Statedef 5900; anim:-2;]
+map(intro_wait):= cond(fighttime = 0, stageconst(intro_startup), 0);
+changestate{value:0;}
+
+[Statedef 0; anim:-2;]
+
+[Statedef 175; anim:-2;]
+
+[Statedef -4] 
+ignorehitpause {
+	assertspecial{flag:nohardcodedkeys; flag2:noautoturn}
+	playerpush {value:0}
+	nothitby{value:SCA}
+	screenbound{value:0}
+	if !standby {tagout{}}
+	}
+	
+[Statedef +1] 
+if roundno = 1 && map(intro_wait) > fighttime {
+	assertspecial{flag:roundnotskip; flag2:nobardisplay;}
+	pause{time:1; pausebg:0;}
+	}
