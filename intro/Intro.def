@@ -1,0 +1,11 @@
+[Info]
+name = "Intro Freeze"
+author = "Foobs"
+ikemenversion = 0.99        
+
+[Files]
+anim = Intro.def
+st	= Intro.zss
+
+[Begin Action 0]
+-1,-1,0,0,-1
