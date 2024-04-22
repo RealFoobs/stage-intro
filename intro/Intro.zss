@@ -1,4 +1,5 @@
 [Statedef 5900; anim:-2;]
+map(intro_nomusic):= cond(fighttime = 0, stageconst(intro_nomusic), 0);
 map(intro_wait):= cond(fighttime = 0, stageconst(intro_startup), 0);
 changestate{value:0;}
 
@@ -16,7 +17,10 @@ ignorehitpause {
 	}
 	
 [Statedef +1] 
-if roundno = 1 && map(intro_wait) > fighttime {
-	assertspecial{flag:roundnotskip; flag2:nobardisplay;}
-	pause{time:1; pausebg:0;}
+if roundno = 1 {
+	if map(intro_nomusic) > fighttime {assertspecial{flag:nomusic;}}
+	if map(intro_wait) > fighttime {
+		assertspecial{flag:roundnotskip; flag2:nobardisplay;}
+		for i = 1; 8; 1 {if playeridexist(player($i),id) {pause{time:1; pausebg:0; redirectid: player($i),id}}}
+		}
 	}
